@@ -30,6 +30,98 @@
             color: var(--cream);
             overflow-x: hidden;
             position: relative;
+            padding-top: 80px;
+        }
+
+        /* Navigation Menu */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(92, 26, 27, 0.95), rgba(139, 21, 56, 0.95));
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--gold-primary);
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--gold-primary);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .nav-menu li a:hover::after {
+            width: 80%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--gold-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
         }
 
         /* Background Pattern */
@@ -574,6 +666,41 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background: linear-gradient(135deg, rgba(92, 26, 27, 0.98), rgba(139, 21, 56, 0.98));
+                padding: 20px;
+                gap: 20px;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 30px var(--shadow);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li a {
+                display: block;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+
             h1 {
                 font-size: 2.5rem;
                 letter-spacing: 4px;
@@ -644,6 +771,37 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">☸ HOÀNG THẦN TÀI</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Trang Chủ</a></li>
+                <li><a href="#about">Về Ngài</a></li>
+                <li><a href="#mystery">Sự Màu Nhiệm</a></li>
+                <li><a href="#donate">Ủng Hộ</a></li>
+                <li><a href="#contact">Liên Hệ</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background Music -->
+    <iframe 
+        id="backgroundMusic"
+        width="0" 
+        height="0" 
+        src="https://www.youtube.com/embed/_jkQo4CJv7E?autoplay=1&loop=1&playlist=_jkQo4CJv7E&controls=0" 
+        frameborder="0" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen
+        style="display: none;">
+    </iframe>
+
     <!-- Floating particles -->
     <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
     <div class="particle" style="left: 80%; top: 30%; animation-delay: 1s;"></div>
@@ -654,7 +812,7 @@
 
     <div class="container">
         <!-- Header -->
-        <header>
+        <header id="home">
             <div class="logo-symbol">☸</div>
             <h1>Hoàng Thần Tài</h1>
             <p class="subtitle">Dzambhala • Bồ Tát Tài Bảo</p>
@@ -687,7 +845,7 @@
         </header>
 
         <!-- About section -->
-        <section class="section">
+        <section class="section" id="about">
             <h2>Về Hoàng Thần Tài</h2>
             <p class="description">
                 Hoàng Thần Tài (Dzambhala hay Jambhala) là một trong những vị thần tài lộc quan trọng nhất trong Phật giáo Tây Tạng. Ngài là hóa thân của Bảo Sanh Phật, tượng trưng cho lòng bi mẫn của chư Phật và Bồ Tát, giúp chúng sinh thoát khỏi cảnh đói nghèo và chỉ dẫn họ đến sự giàu có, thịnh vượng.
@@ -701,7 +859,7 @@
         </section>
 
         <!-- Mantra section -->
-        <section class="section">
+        <section class="section" id="mystery">
             <h2>Thần Chú Linh Thiêng</h2>
             <div class="mantra-box">
                 <p style="font-size: 1.3rem; color: var(--gold-light); margin-bottom: 20px;">🕉️ Thần Chú Hoàng Thần Tài 🕉️</p>
@@ -767,7 +925,7 @@
         </section>
 
         <!-- Donation section -->
-        <section class="donation-section">
+        <section class="donation-section" id="donate">
             <h2>Cúng Dường & Ủng Hộ</h2>
             <p class="description" style="color: var(--gold-light);">
                 Mọi sự cúng dường đều được dùng để duy trì trang web, tổ chức các buổi lễ cầu an và giúp đỡ những người nghèo khó. Công đức vô lượng!
@@ -792,6 +950,22 @@
             </p>
         </section>
 
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <h2>Liên Hệ</h2>
+            <div class="description" style="text-align: center;">
+                <p style="font-size: 1.2rem; margin: 20px 0;">
+                    📧 Email: contact@hoangthantai.vn<br>
+                    📱 Hotline: 1900-xxxx<br>
+                    🏠 Địa chỉ: [Địa chỉ chùa/điện thờ]
+                </p>
+                <p style="margin-top: 30px;">
+                    Nếu quý vị có thắc mắc hoặc muốn tham gia các buổi lễ cầu an,<br>
+                    xin vui lòng liên hệ với chúng tôi.
+                </p>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer>
             <div class="lotus-symbol">🪷</div>
@@ -807,6 +981,21 @@
     </div>
 
     <script>
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+            });
+        });
+
         // Prayer form submission
         document.getElementById('prayerForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -856,13 +1045,17 @@
             }
         }
 
-        // Add smooth scroll behavior
+        // Smooth scroll behavior
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    const offsetTop = target.offsetTop - 70; // Account for fixed nav
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
@@ -882,6 +1075,21 @@
         }
 
         createParticles();
+
+        // Auto-play music with user interaction fallback
+        window.addEventListener('load', function() {
+            const musicFrame = document.getElementById('backgroundMusic');
+            
+            // Try to play music on first user interaction
+            document.addEventListener('click', function playMusic() {
+                if (musicFrame && musicFrame.src) {
+                    // Reload iframe to trigger autoplay
+                    musicFrame.src = musicFrame.src;
+                }
+                // Remove listener after first click
+                document.removeEventListener('click', playMusic);
+            }, { once: true });
+        });
     </script>
 </body>
 </html>
